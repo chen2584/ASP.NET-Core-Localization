@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LocalizationTest.Models;
 using Microsoft.Extensions.Localization;
+using Microsoft.AspNetCore.Localization;
 
 namespace LocalizationTest.Controllers
 {
@@ -41,6 +42,12 @@ namespace LocalizationTest.Controllers
         public string Chen()
         {
             return _stringLocalizer.GetString("Hello");
+        }
+
+        public string Chen2()
+        {
+            var culture = Request.HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture;
+            return culture.ToString();
         }
 
         public IActionResult Error()
